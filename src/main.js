@@ -4,7 +4,7 @@ const ec = new EC("secp256k1");
 require("dotenv").config();
 
 const myKey = ec.keyFromPrivate(process.env.PRIVATE_KEY);
-const myWalletAddress = ec.getPublicKey("hex");
+const myWalletAddress = ec.getPublic("hex");
 
 let simpCoin = new BlockChain();
 
@@ -13,9 +13,9 @@ tx1.signTransaction(myKey);
 simpCoin.addTransaction(tx1);
 
 console.log("\n Starting the miner....");
-simpCoin.minePendingTransactions("preetimans-address");
+simpCoin.minePendingTransactions(myWalletAddress);
 
 console.log(
   "\n Balance of Preetiman is ",
-  simpCoin.getBalanceOfAddress("preetimans-address")
+  simpCoin.getBalanceOfAddress(myWalletAddress)
 );
