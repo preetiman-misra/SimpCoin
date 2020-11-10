@@ -88,7 +88,7 @@ class BlockChain {
   }
 
   createGenesisBlock() {
-    return new Block("01/01/202", "Genesis Block", "0");
+    return new Block(Date.parse("2020-01-01"), [], "0");
   }
 
   getLatestBlock() {
@@ -96,24 +96,38 @@ class BlockChain {
   }
 
   minePendingTransactions(miningRewardAddress) {
-    let block = new Block(Date.now, this.pendingTransactions);
+    const rewardTx = new Transaction(
+      null,
+      miningRewardAddress,
+      this.miningReward
+    );
+    this.pendingTransactions.push(rewardTx);
+
+    const block = new Block(
+      Date.now(),
+      this.pendingTransactions,
+      this.getLatestBlock().hash
+    );
     block.mineBlock(this.difficulty);
 
-    console.log("Block successfully mined !");
+    console.log("Block successfully mined!");
     this.chain.push(block);
 
-    this.pendingTransactions = [
-      new Transaction(null, miningRewardAddress, this.miningReward),
-    ];
+    this.pendingTransactions = [];
   }
 
   addTransaction(transaction) {
     if (!transaction.fromAddress || !transaction.toAddress) {
-      throw new Error("Transaction must include FROM and TO addresses!");
+      throw new Error("Transaction must include from and to address");
     }
 
+    // Verify the transactiion
     if (!transaction.isValid()) {
-      throw new Error("Transaction is not valid!");
+      throw new Error("Cannot add invalid transaction to chain");
+    }
+
+    if (transaction.amount <= 0) {
+      throw new Error("Transaction amount should be higher than 0");
     }
 
     this.pendingTransactions.push(transaction);

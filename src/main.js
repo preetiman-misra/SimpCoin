@@ -1,9 +1,10 @@
 const { BlockChain, Transaction } = require("./blockchain");
 const EC = require("elliptic").ec;
 const ec = new EC("secp256k1");
-require("dotenv").config();
 
-const myKey = ec.keyFromPrivate(process.env.PRIVATE_KEY);
+const myKey = ec.keyFromPrivate(
+  "74cbb51e7ac385ba59181084c59629d0703aa595067f739f39890001e0fd0a005"
+);
 const myWalletAddress = myKey.getPublic("hex");
 
 let simpCoin = new BlockChain();
