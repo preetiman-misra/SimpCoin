@@ -4,7 +4,7 @@ const ec = new EC("secp256k1");
 require("dotenv").config();
 
 const myKey = ec.keyFromPrivate(process.env.PRIVATE_KEY);
-const myWalletAddress = ec.getPublic("hex");
+const myWalletAddress = myKey.getPublic("hex");
 
 let simpCoin = new BlockChain();
 
