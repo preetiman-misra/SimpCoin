@@ -1,7 +1,7 @@
 # SIMPCOIN - The simple, lightweight, educational  Cryptocurrency
 
 ## Description
-This is a simple Javascript BlockChain and CryptoCurrency implemented in Javascript.
+This is a simple BlockChain and CryptoCurrency implemented in Javascript.
 I made this in order to better understand how a proof-of-work blockchain works, and how we can 
 add the functionality of having a cryptocurrency based on that simple blockchain.
 
