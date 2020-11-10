@@ -174,4 +174,5 @@ class BlockChain {
 }
 
 module.exports.BlockChain = BlockChain;
+module.exports.Block = Block;
 module.exports.Transaction = Transaction;
